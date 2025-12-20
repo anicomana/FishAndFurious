@@ -1,12 +1,14 @@
 using UnityEngine;
 
-public class WorldMove : MonoBehaviour
+public class GroundMovement : MonoBehaviour
 {
     PlayerController playerController;
     GameObject player;
 
-    private Vector3 worldTargetPos;
-    private bool worldMoving;
+    public event System.Action OnMoved;
+
+    private Vector3 groundTargetPos;
+    private bool groundMoving;
 
     void Awake ()
     {
@@ -15,22 +17,22 @@ public class WorldMove : MonoBehaviour
 
     void Start()
     {
-        worldTargetPos = transform.position;
+        groundTargetPos = transform.position;
 
         if (player != null) {
             playerController = player.GetComponent<PlayerController>();
-            Debug.Log("Script found!");
-            }
+        }
     }
 
     void Update()
     {
-        if (worldMoving) {
-            transform.position = Vector3.MoveTowards(transform.position, worldTargetPos, playerController.moveSpeed * Time.deltaTime);
-            
-            if (Vector3.Distance(transform.position, worldTargetPos) < playerController.posThreshold) {
-                transform.position = worldTargetPos;
-                worldMoving = false;
+        if (groundMoving) {
+            transform.position = Vector3.MoveTowards(transform.position, groundTargetPos, playerController.moveSpeed * Time.deltaTime);
+            OnMoved?.Invoke();
+
+            if (Vector3.Distance(transform.position, groundTargetPos) < playerController.posThreshold) {
+                transform.position = groundTargetPos;
+                groundMoving = false;
             }
             return;
         }
@@ -45,7 +47,8 @@ public class WorldMove : MonoBehaviour
         }
         
         if (dir != Vector3.zero) {
-            worldTargetPos += dir * playerController.stepSizeXAxis;
-            worldMoving = true;        }
+            groundTargetPos += dir * playerController.stepSizeXAxis;
+            groundMoving = true;
+        }
     }
 }
