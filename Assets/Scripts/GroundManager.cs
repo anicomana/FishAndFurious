@@ -7,8 +7,8 @@ public class GroundManager : MonoBehaviour
     public event System.Action OnMovedBackward;
 
     //where to listen events from
-    PlayerController playerController;
-    GameObject player;
+    ScoreManager scoreManager;
+    GameObject scoreManagerObject;
 
     public GameObject[] sectionToSpawn;
     public int nInitialSections = 5;
@@ -23,15 +23,15 @@ public class GroundManager : MonoBehaviour
     //on awake finds gameobjects in scene
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        scoreManagerObject = GameObject.Find("_ScoreManager");
     }
 
     void Start()
     {
         //if groundManagerObject is not null, then get component and subscribes to groundManager event
-        if (player != null) {
-            playerController = player.GetComponent<PlayerController>();
-            playerController.OnNewMaxReached += InstantiateRandomSection;
+        if (scoreManagerObject != null) {
+            scoreManager = scoreManagerObject.GetComponent<ScoreManager>();
+            scoreManager.OnNewMaxReached += InstantiateRandomSection;
         }
 
         lastSectionSpawnPos = firstSectionPos;

@@ -4,10 +4,6 @@ public class PlayerController : MonoBehaviour
 {
     GameObject player;
 
-    //where to listen events from
-    GroundManager groundManager;
-    GameObject groundManagerObject;
-
     public float stepSizeSide = 1f;
     public float stepSizeXAxis = 2f;
     public float moveSpeed = 15f;
@@ -18,27 +14,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerTargetPos;
     private bool playerMoving;
 
-    public event System.Action OnNewMaxReached;
-    private int currentSection = -2;
-    private int maxSectionReached;
-    private int scoreGainedPerSection = 1;
-
-    void Awake()
-    {
-        groundManagerObject = GameObject.Find("_GroundManager");
-    }
-
     void Start()
     {
         playerTargetPos = transform.position;
-        maxSectionReached = currentSection;
-
-        
-        if(groundManagerObject !=null) {
-            groundManager = groundManagerObject.GetComponent<GroundManager>();
-            groundManager.OnMovedForward += AddCurrentSection;
-            groundManager.OnMovedBackward += RemoveCurrentSection;
-        }
     }
 
     void Update()
@@ -76,23 +54,5 @@ public class PlayerController : MonoBehaviour
         } else if (playerTargetPos.x > playerOutBoundSide) {
             playerTargetPos = new Vector3(playerOutBoundSide, playerTargetPos.y, playerTargetPos.z);
         }
-    }
-
-    //add points when going forward
-    void AddCurrentSection()
-    {
-        currentSection += scoreGainedPerSection;
-
-        if (currentSection > maxSectionReached) {
-            maxSectionReached = currentSection;
-            OnNewMaxReached?.Invoke();
-            Debug.Log("Current score is:" + maxSectionReached);
-        }
-    }
-
-    //remove point when going backwards
-    void RemoveCurrentSection()
-    {
-        currentSection -= scoreGainedPerSection;
     }
 }
