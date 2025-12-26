@@ -2,15 +2,27 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    ObstacleSpawnManager obstacleSpawnManager;
+    GameObject obstacleSpawnManagerObject;
+
+    public float obstacleSpeed = 3f;
+
+    void Awake ()
+    {
+    }
     void Start()
     {
-        
+        obstacleSpawnManagerObject = transform.parent.gameObject;
+
+        if (obstacleSpawnManagerObject != null) {
+            obstacleSpawnManager = obstacleSpawnManagerObject.GetComponent<ObstacleSpawnManager>();
+        } else {
+            Debug.Log("Component not found");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(Vector3.right * obstacleSpawnManager.dir * obstacleSpeed * Time.deltaTime);
     }
 }
