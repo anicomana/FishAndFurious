@@ -5,8 +5,6 @@ public class ObstacleController : MonoBehaviour
     ObstacleSpawnManager obstacleSpawnManager;
     GameObject obstacleSpawnManagerObject;
 
-    public float obstacleSpeed = 3f;
-
     void Awake ()
     {
     }
@@ -23,6 +21,11 @@ public class ObstacleController : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.right * obstacleSpawnManager.dir * obstacleSpeed * Time.deltaTime);
+        transform.Translate(Vector3.right * obstacleSpawnManager.dir * obstacleSpawnManager.obstacleSpeed * Time.deltaTime);
+
+        if (transform.position.x < -obstacleSpawnManager.outBoundSide || transform.position.x > obstacleSpawnManager.outBoundSide) {
+            Destroy(gameObject);
+        }
+        
     }
 }

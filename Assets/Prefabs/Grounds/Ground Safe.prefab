@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 626043852944861780}
   - component: {fileID: 248712681118015683}
   m_Layer: 0
-  m_Name: Ground3
+  m_Name: Ground Safe
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: df4764ad5a7558149bc67c94dfbea306, type: 2}
+  - {fileID: 2100000, guid: 072951cf96ce373419fe46f120c5edaf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -10,12 +10,18 @@ public class ObstacleSpawnManager : MonoBehaviour
     public float obstacleSpawnPosX = 7f;
     public float minSpawnDelay = 2f;
     public float maxSpawnDelay = 5f;
+    public float outBoundSide = 12f;
+    public float minObstacleSpeed = 2f;
+    public float maxObstacleSpeed = 4f;
 
+    public float obstacleSpeed;
 
     void Start()
     {
         float randomValue;
         randomValue = Random.value;
+
+        obstacleSpeed = Random.Range(minObstacleSpeed, maxObstacleSpeed);
 
         if (randomValue < 0.5f) {
             dir = -1;

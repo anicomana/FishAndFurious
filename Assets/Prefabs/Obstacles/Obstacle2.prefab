@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 072951cf96ce373419fe46f120c5edaf, type: 2}
+  - {fileID: 2100000, guid: ca8f1b68012f7624292392d6f627b6a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,7 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68f4df6f0434da4188345aba1bd1230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleController
-  obstacleSpeed: 3
+  minObstacleSpeed: 2
+  maxObstacleSpeed: 4
 --- !u!54 &8085122245906877046
 Rigidbody:
   m_ObjectHideFlags: 0

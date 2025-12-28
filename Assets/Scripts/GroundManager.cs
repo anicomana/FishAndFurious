@@ -12,10 +12,10 @@ public class GroundManager : MonoBehaviour
     GameObject scoreManagerObject;
 
     public GameObject[] sectionToSpawn;
-    public int nInitialSections = 5;
+    public GameObject safeSection;
+    public int nInitialSections = 20;
     public float nextSectionDistance = 2f;
     public float outBoundBottom = -7f;
-    public float outBoundSide = 12f;
     public float spawnDelay = 0.1f;
 
     private Vector3 outBound;

@@ -368,7 +368,6 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
-  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -494,18 +493,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &330585548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 400531232a53afc4cb988be6366ed62a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,9 +891,7 @@ MonoBehaviour:
   - {fileID: 3562735117945074313, guid: 61526ec5ef065a8448e04f19eb24de95, type: 3}
   - {fileID: 658470955505295345, guid: 382b458a1c9f00b4bb44b110c95ec574, type: 3}
   - {fileID: 4658378644802569844, guid: cb174862d080e914c8ff9fc2b35f9dcb, type: 3}
-  - {fileID: 4658378644802569844, guid: 098184ca38269ec4da05b54aea5be6b3, type: 3}
-  safeSection: {fileID: 0}
-  nInitialSections: 3
+  nInitialSections: 20
   nextSectionDistance: 2
   outBoundBottom: -7
   spawnDelay: 0.1
