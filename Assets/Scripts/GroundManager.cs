@@ -83,8 +83,6 @@ public class GroundManager : MonoBehaviour
         //to instantiate a random section from the list
         int randomSection = Random.Range(0, sectionToSpawn.Length);
         Instantiate(sectionToSpawn[randomSection], lastSectionSpawnPos, Quaternion.identity);
-        Debug.Log("New section spawned!");
-
         shouldSpawn = false;
     }
     
@@ -93,7 +91,7 @@ public class GroundManager : MonoBehaviour
 
         isGroundMoving = false; //declares locally that ground is not moving anymore
 
-        _//checks if a new max section has been reached, if positive then instantiates new section
+        //checks if a new max section has been reached, if positive then instantiates new section
         if (shouldSpawn) {
             InstantiateRandomSection();
         }

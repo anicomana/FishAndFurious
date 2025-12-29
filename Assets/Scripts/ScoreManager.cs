@@ -38,14 +38,12 @@ public class ScoreManager : MonoBehaviour
     //add points when going forward
     void AddCurrentSection()
     {
-        Debug.Log("AddCurrentSection");
         currentSection += scoreGainedPerSection;
 
         if (currentSection > maxSectionReached) {
             maxSectionReached = currentSection;
             OnNewMaxReached.Invoke();
             Debug.Log("Current score is:" + maxSectionReached);
-            Debug.Log("Current section in:" + currentSection);
         }
     }
 

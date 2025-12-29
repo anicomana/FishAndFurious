@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     {
         if (player != null) {
             playerController = player.GetComponent<PlayerController>();
-            //playerController.OnEnemyCollision += GameOver;
+            playerController.OnEnemyCollision += GameOver;
         }
     }
 
@@ -27,5 +27,6 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         OnGameOver?.Invoke();
+        Debug.Log("GAMEOVER");
     }
 }
