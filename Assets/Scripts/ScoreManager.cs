@@ -3,10 +3,13 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public event System.Action OnNewMaxReached;
+    public event System.Action MovedBackTooMuch;
 
     //where to listen events from
     GroundManager groundManager;
     GameObject groundManagerObject;
+    GameManager gameManager;
+    GameObject gameManagerObject;
     GameObject startingSection;
 
     private float currentSection;
@@ -15,6 +18,7 @@ public class ScoreManager : MonoBehaviour
     void Awake()
     {
         groundManagerObject = GameObject.Find("_GroundManager");
+        gameManagerObject = GameObject.Find("_GameManager");
         startingSection = GameObject.Find("StartingSection");
     }
 
@@ -22,6 +26,10 @@ public class ScoreManager : MonoBehaviour
     {
         currentSection = -startingSection.transform.position.z;
         maxSectionReached = currentSection;
+
+        if (gameManagerObject !=null) {
+            gameManager = gameManagerObject.GetComponent<GameManager>();
+        }
 
         if(groundManagerObject !=null) {
             groundManager = groundManagerObject.GetComponent<GroundManager>();
@@ -32,7 +40,10 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
-        
+        float diff = maxSectionReached - currentSection;
+        if (diff >= gameManager.maxBackwardsSteps) {
+            MovedBackTooMuch?.Invoke();
+        }
     }
 
     //add points when going forward
@@ -52,5 +63,4 @@ public class ScoreManager : MonoBehaviour
     {
         currentSection -= scoreGainedPerSection;
     }
-
 }  

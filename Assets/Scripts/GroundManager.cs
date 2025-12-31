@@ -18,7 +18,7 @@ public class GroundManager : MonoBehaviour
     public GameObject[] sectionToSpawn;
     public int nInitialSections = 20;
     public float nextSectionDistance = 2f;
-    public float outBoundBottom = -7f; //referenced in GroundMovement
+    public float outBoundBottom = -9f; //referenced in GroundMovement
     public float spawnDelay = 0.1f;
     public bool shouldSpawn = false;
     private Vector3 firstSectionPos;
