@@ -24,10 +24,12 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        RestartScore();
+        ResetSCore();
 
         if (gameManagerObject !=null) {
             gameManager = gameManagerObject.GetComponent<GameManager>();
+            gameManager.OnGameOver += CalculateFinalScore;
+            gameManager.OnGameReset += ResetSCore;
         }
 
         if(groundManagerObject !=null) {
@@ -63,10 +65,15 @@ public class ScoreManager : MonoBehaviour
         currentSection -= scoreGainedPerSection;
     }
 
-    //to be called when Restart event is Invoked
-    void RestartScore()
+    void CalculateFinalScore()
     {
-    currentSection = -startingBase.transform.position.z;
-    maxSectionReached = currentSection;
+        Debug.Log("Your final score is" + maxSectionReached);
+    }
+    //to be called when Restart event is Invoked
+    void ResetSCore()
+    {
+        currentSection = -startingBase.transform.position.z;
+        maxSectionReached = currentSection;
+        Debug.Log("Score Reset");
     }
 }  

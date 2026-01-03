@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
     {
         if (gameManagerObject != null) {
             gameManager = gameManagerObject.GetComponent<GameManager>();
-            gameManager.OnGameOver += playerGameOver;
+            gameManager.OnGameOver += () => {isGameOver = true;};
+            gameManager.OnGameReset += () => {isGameOver = false;};
         }
 
         playerTargetPos = transform.position;
@@ -78,10 +79,5 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Enemy") {
             OnEnemyCollision?.Invoke();
         }
-    }
-
-    void playerGameOver()
-    {
-        isGameOver = true;
     }
 }

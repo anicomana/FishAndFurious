@@ -19,8 +19,9 @@ public class GroundManager : MonoBehaviour
     public float outBoundBottom = -9f; //referenced in GroundMovement
     public float spawnDelay = 0.1f;
     public bool shouldSpawn = false;
-    private Vector3 firstSectionPos;
+    private Vector3 firstSectionSpawnPos;
     private Vector3 lastSectionSpawnPos;
+    private Vector3 startingBaseInitialPos;
     private bool isGameOver;
     private bool isGroundMoving;
 
@@ -44,11 +45,10 @@ public class GroundManager : MonoBehaviour
         if (gameManagerObject != null) {
             gameManager = gameManagerObject.GetComponent<GameManager>();
             gameManager.OnGameOver += GroundGameOver;
+            gameManager.OnGameReset += ResetGroundSpawn;
         }
-        firstSectionPos = new Vector3 (startingBase.transform.position.x, startingBase.transform.position.y, startingBase.transform.localScale.z);
-        lastSectionSpawnPos = firstSectionPos;
-
-        SpawnStartingSections();
+        startingBaseInitialPos = startingBase.transform.position;
+        ResetGroundSpawn();
     }
 
     void Update()
@@ -77,11 +77,6 @@ public class GroundManager : MonoBehaviour
         shouldSpawn = false;
     }
 
-    void InstantiateStartingBase()
-    {
-        Instantiate(startingBase, startingBase.transform.position, Quaternion.identity);
-    }
-    
     //method called when when ground movement is done (from groundMovement)
     public void SpawnNewSectionIfNeeded() {
 
@@ -95,7 +90,6 @@ public class GroundManager : MonoBehaviour
     //to be called when Restart event is invoked
     void SpawnStartingSections()
     {
-        InstantiateStartingBase();
         InstantiateRandomSection();
 
         //for cycle to spawn next sections nCycles times in lastSectionSpawnPos
@@ -112,4 +106,12 @@ public class GroundManager : MonoBehaviour
         isGameOver = true;
     }
 
+    void ResetGroundSpawn()
+    {
+        firstSectionSpawnPos = new Vector3 (startingBaseInitialPos.x, startingBaseInitialPos.y, startingBase.transform.localScale.z);
+        lastSectionSpawnPos = firstSectionSpawnPos;
+        SpawnStartingSections();
+        isGameOver = false;
+        Debug.Log("Ground spawn");
+    }
 }

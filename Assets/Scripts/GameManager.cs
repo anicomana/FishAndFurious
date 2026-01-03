@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     ScoreManager scoreManager;
     GameObject scoreManagerObject;
     public event System.Action OnGameOver;
+    public event System.Action OnGameReset;
     public int maxBackwardsSteps = 3;
     //private bool isGameOver;
 
@@ -30,6 +31,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //if isGameOver true and press R then invoke Restart Event
+        if (Input.GetKeyDown(KeyCode.R)) {
+            OnGameReset?.Invoke();
+            Debug.Log("GAME RESET");
+        }
     }
 
     void GameOver()

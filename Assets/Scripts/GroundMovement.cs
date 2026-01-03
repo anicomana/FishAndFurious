@@ -13,14 +13,21 @@ public class GroundMovement : MonoBehaviour
     GroundManager groundManager;
     GameObject groundManagerObject;
 
+    GameManager gameManager;
+    GameObject gameManagerObject;
+    private float startingBaseAsideYAxis = -5f;
     private Vector3 groundTargetPos;
-    private bool groundMoving;
+    private Vector3 startingBaseInitialPos;
+    private bool isGroundMoving;
+    private bool isStartingBaseAside;
+    
 
     //on awake finds gameobjects in scene
     void Awake ()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         groundManagerObject = GameObject.Find("_GroundManager");
+        gameManagerObject = GameObject.Find("_GameManager");
     }
 
     void Start()
@@ -37,26 +44,41 @@ public class GroundMovement : MonoBehaviour
             groundManager.OnMovedForward += MoveForward; //subscribes to event by groundManager
             groundManager.OnMovedBackward += MoveBackward; //subscribes to event by groundManager
         }
+
+        if (gameManagerObject != null) {
+            gameManager = gameManagerObject.GetComponent<GameManager>();
+            gameManager.OnGameReset += ResetGroundPosition;
+        }
+
+        if(gameObject.CompareTag("StartingBase")) {
+            startingBaseInitialPos = transform.position;
+        }
+
     }
 
     void Update()
     {
         //moves the section towards the target that has move
-        if (groundMoving) {
+        if (isGroundMoving) {
             transform.position = Vector3.MoveTowards(transform.position, groundTargetPos, playerController.moveSpeed * Time.deltaTime);
 
             //if close enough, snaps to target's position
             //when section snaps to its target, calls for SpawnNewSectionIfNeeded that checks if a new section should spawn
             if (Vector3.Distance(transform.position, groundTargetPos) < playerController.posThreshold) {
                 transform.position = groundTargetPos;
-                groundMoving = false;
+                isGroundMoving = false;
                 groundManager.SpawnNewSectionIfNeeded(); //after the movement is made calls method to spawn if needed
             }
             return;
         }
 
-        if (transform.position.z < groundManager.outBoundBottom){
-            Destroy(gameObject);
+        if (transform.position.z <= groundManager.outBoundBottom){
+            if(gameObject.CompareTag("StartingBase")) {
+                transform.position = new Vector3(transform.position.x, startingBaseAsideYAxis, groundManager.outBoundBottom);
+                isStartingBaseAside = true;
+            } else {
+                OnCleanUpAndDestroy();
+            }
         }
     }
 
@@ -89,8 +111,37 @@ public class GroundMovement : MonoBehaviour
         }
 
         //once dir has been determined, we can calculate new groundTargetPos
-        groundTargetPos += dir * playerController.stepSizeXAxis;
-        groundMoving = true;
+        if (isStartingBaseAside == false) {
+            groundTargetPos += dir * playerController.stepSizeXAxis;
+            isGroundMoving = true;
+        }
+    }
+
+    void ResetGroundPosition()
+    {
+        if (gameObject.CompareTag("StartingBase")) {
+            transform.position = startingBaseInitialPos;
+        } else {
+            OnCleanUpAndDestroy();
+        }
+        
+        groundTargetPos = transform.position;
+        isStartingBaseAside = false;
+    }
+    
+    void OnCleanUpAndDestroy()
+    {
+            if (groundManager != null) {
+            groundManager.OnMovedForward -= MoveForward;
+            groundManager.OnMovedBackward -= MoveBackward;
+        }
+
+        if (gameManager != null) {
+            gameManager.OnGameReset -= ResetGroundPosition;
+        }
+
+        Destroy(gameObject);
+
     }
 }
 
