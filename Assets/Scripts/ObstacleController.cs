@@ -7,6 +7,7 @@ public class ObstacleController : MonoBehaviour
 
     void Awake ()
     {
+
     }
     void Start()
     {
@@ -19,7 +20,7 @@ public class ObstacleController : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.right * obstacleSpawnManager.dir * obstacleSpawnManager.obstacleSpeed * Time.deltaTime);
+        transform.Translate(Vector3.down * obstacleSpawnManager.obstacleSpeed * Time.deltaTime);
 
         if (transform.position.x < -obstacleSpawnManager.outBoundSide || transform.position.x > obstacleSpawnManager.outBoundSide) {
             Destroy(gameObject);

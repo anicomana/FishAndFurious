@@ -35,14 +35,14 @@ public class ObstacleSpawnManager : MonoBehaviour
         float randomValue;
         randomValue = Random.value;
 
-        obstacleSpeed = Random.Range(minObstacleSpeed, maxObstacleSpeed);
-
         if (randomValue < 0.5f) {
             dir = -1;
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         } else {
             dir = 1;
         }
 
+        obstacleSpeed = Random.Range(minObstacleSpeed, maxObstacleSpeed);
         obstacleSpawnPosX *= -dir;
         InstantiateRandomBonus();
         InstantiateRandomObstacle();
@@ -68,6 +68,7 @@ public class ObstacleSpawnManager : MonoBehaviour
         //to instantiate a random section from the list
         Vector3 obstacleSpawnPos = new Vector3 (obstacleSpawnPosX, transform.position.y , transform.position.z);
         transform.position = obstacleSpawnPos;
+
         int randomObstacle = Random.Range(0, obstaclesToSpawn.Length);
         Instantiate(obstaclesToSpawn[randomObstacle], transform);
     }

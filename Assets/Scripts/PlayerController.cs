@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public event System.Action OnEnemyCollision;
     GameObject player;
 
+    public Vector3 playerInitialPos;
     public int stepSizeSide = 1;
     public int stepSizeXAxis = 2;
     public float moveSpeed = 15f;
@@ -29,9 +30,9 @@ public class PlayerController : MonoBehaviour
         if (gameManagerObject != null) {
             gameManager = gameManagerObject.GetComponent<GameManager>();
             gameManager.OnGameOver += () => {isGameOver = true;};
-            gameManager.OnGameReset += () => {isGameOver = false;};
+            gameManager.OnGameReset += ResetPlayerPos;
         }
-
+        playerInitialPos = transform.position;
         playerTargetPos = transform.position;
         isGameOver = false;
     }
@@ -79,5 +80,11 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Enemy") {
             OnEnemyCollision?.Invoke();
         }
+    }
+
+    void ResetPlayerPos()
+    {
+        transform.position = playerInitialPos;
+        isGameOver = false;
     }
 }

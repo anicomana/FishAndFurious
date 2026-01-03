@@ -46,9 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleSpawnManager
   dir: 0
   obstaclesToSpawn:
-  - {fileID: 1118415184105327412, guid: c505e4134d81e304a8936b1e4bf11df4, type: 3}
-  - {fileID: 1118415184105327412, guid: 66bc018268f9e144cb8fb6f973ffd3dc, type: 3}
-  bonusToSpawn: {fileID: 99347360429708735, guid: 2cf01fc71ca93cc4f8b12595b7c88db1, type: 3}
+  - {fileID: 8434839522949608891, guid: 4d424e97bbb2f874bbf104a4a340afd7, type: 3}
+  - {fileID: 6253749154948317968, guid: d96ca6297da3563418c4158ae5721405, type: 3}
+  bonusToSpawn: {fileID: 1367457596041369393, guid: a6be3f45af4ec6b4c82b6cb17d1832b0, type: 3}
   spawnDelay: 2
   obstacleSpawnPosX: 7
   minSpawnDelay: 1
