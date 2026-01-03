@@ -14,8 +14,6 @@ public class ObstacleController : MonoBehaviour
 
         if (obstacleSpawnManagerObject != null) {
             obstacleSpawnManager = obstacleSpawnManagerObject.GetComponent<ObstacleSpawnManager>();
-        } else {
-            Debug.Log("Component not found");
         }
     }
 

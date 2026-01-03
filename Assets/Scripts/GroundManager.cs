@@ -112,6 +112,5 @@ public class GroundManager : MonoBehaviour
         lastSectionSpawnPos = firstSectionSpawnPos;
         SpawnStartingSections();
         isGameOver = false;
-        Debug.Log("Ground spawn");
     }
 }

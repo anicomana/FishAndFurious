@@ -55,7 +55,7 @@ public class ScoreManager : MonoBehaviour
         if (currentSection > maxSectionReached) {
             maxSectionReached = currentSection;
             OnNewMaxReached.Invoke();
-            Debug.Log("Current score is:" + maxSectionReached);
+            Debug.Log("Current score is: " + maxSectionReached);
         }
     }
 
@@ -67,13 +67,12 @@ public class ScoreManager : MonoBehaviour
 
     void CalculateFinalScore()
     {
-        Debug.Log("Your final score is" + maxSectionReached);
+        Debug.Log("Your final score is: " + maxSectionReached);
     }
     //to be called when Restart event is Invoked
     void ResetSCore()
     {
         currentSection = -startingBase.transform.position.z;
         maxSectionReached = currentSection;
-        Debug.Log("Score Reset");
     }
 }  

@@ -48,6 +48,7 @@ MonoBehaviour:
   obstaclesToSpawn:
   - {fileID: 1118415184105327412, guid: c505e4134d81e304a8936b1e4bf11df4, type: 3}
   - {fileID: 1118415184105327412, guid: 66bc018268f9e144cb8fb6f973ffd3dc, type: 3}
+  bonusToSpawn: {fileID: 99347360429708735, guid: 2cf01fc71ca93cc4f8b12595b7c88db1, type: 3}
   spawnDelay: 2
   obstacleSpawnPosX: 7
   minSpawnDelay: 1

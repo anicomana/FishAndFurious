@@ -8,12 +8,12 @@ public class PlayerController : MonoBehaviour
     public event System.Action OnEnemyCollision;
     GameObject player;
 
-    public float stepSizeSide = 1f;
-    public float stepSizeXAxis = 2f;
+    public int stepSizeSide = 1;
+    public int stepSizeXAxis = 2;
     public float moveSpeed = 15f;
     public float posThreshold = 0.001f;
 
-    public float playerOutBoundSide = 5f;
+    public int playerOutBoundSide = 5;
     
     private Vector3 playerTargetPos;
     private bool playerMoving;

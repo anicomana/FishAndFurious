@@ -4,8 +4,13 @@ using System.Collections;
  
 public class ObstacleSpawnManager : MonoBehaviour
 {
+    PlayerController playerController;
+    GameObject player;
+
     public int dir;
     public GameObject[] obstaclesToSpawn;
+    public GameObject bonusToSpawn;
+
     public float spawnDelay = 2f;
     public float obstacleSpawnPosX = 7f;
     public float minSpawnDelay = 2f;
@@ -15,9 +20,18 @@ public class ObstacleSpawnManager : MonoBehaviour
     public float maxObstacleSpeed = 4f;
 
     public float obstacleSpeed;
+    
+    void Awake ()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
 
+    }
     void Start()
     {
+        if (player != null) {
+            playerController = player.GetComponent<PlayerController>();
+        }
+
         float randomValue;
         randomValue = Random.value;
 
@@ -30,6 +44,7 @@ public class ObstacleSpawnManager : MonoBehaviour
         }
 
         obstacleSpawnPosX *= -dir;
+        InstantiateRandomBonus();
         InstantiateRandomObstacle();
         StartCoroutine(InstantiateWithDelay());
     }
@@ -56,4 +71,15 @@ public class ObstacleSpawnManager : MonoBehaviour
         int randomObstacle = Random.Range(0, obstaclesToSpawn.Length);
         Instantiate(obstaclesToSpawn[randomObstacle], transform);
     }
+
+    void InstantiateRandomBonus()
+    {
+        //instantiate bonus Game Object
+        int randomPosX = Random.Range(-playerController.playerOutBoundSide, playerController.playerOutBoundSide);
+        Vector3 spawnPos = new Vector3(randomPosX, transform.position.y , transform.position.z);
+        transform.position = spawnPos;
+        Instantiate(bonusToSpawn, transform);
+
+    }
+
 }
