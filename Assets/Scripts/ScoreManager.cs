@@ -4,6 +4,7 @@ public class ScoreManager : MonoBehaviour
 {
     public event System.Action OnNewMaxReached;
     public event System.Action MovedBackTooMuch;
+    public event System.Action OnNewBonusReached;
 
     //where to listen events from
     GroundManager groundManager;
@@ -15,6 +16,9 @@ public class ScoreManager : MonoBehaviour
     private float currentSection;
     private float maxSectionReached;
     private int scoreGainedPerSection = 1;
+    private int minSectionsUntilBonus = 10;
+    private int maxSectionsUntilBonus = 20;
+    private int sectionsUntilNextBonus;
     void Awake()
     {
         groundManagerObject = GameObject.Find("_GroundManager");
@@ -25,6 +29,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         ResetSCore();
+        ResetSectionsUntilBonus();
 
         if (gameManagerObject !=null) {
             gameManager = gameManagerObject.GetComponent<GameManager>();
@@ -56,6 +61,13 @@ public class ScoreManager : MonoBehaviour
             maxSectionReached = currentSection;
             OnNewMaxReached.Invoke();
             Debug.Log("Current score is: " + maxSectionReached);
+
+            sectionsUntilNextBonus--;
+            if(sectionsUntilNextBonus <= 0) {
+                ResetSectionsUntilBonus();
+                OnNewBonusReached?.Invoke() ;
+                Debug.Log("Next bonus reached");
+            }
         }
     }
 
@@ -74,5 +86,11 @@ public class ScoreManager : MonoBehaviour
     {
         currentSection = -startingBase.transform.position.z;
         maxSectionReached = currentSection;
+    }
+
+    void ResetSectionsUntilBonus()
+    {
+        sectionsUntilNextBonus = Random.Range(minSectionsUntilBonus, maxSectionsUntilBonus + 1);
+        Debug.Log("Sections until next bonus:" + sectionsUntilNextBonus);
     }
 }  

@@ -9,7 +9,6 @@ public class ObstacleSpawnManager : MonoBehaviour
 
     public int dir;
     public GameObject[] obstaclesToSpawn;
-    public GameObject bonusToSpawn;
 
     public float spawnDelay = 2f;
     public float obstacleSpawnPosX = 7f;
@@ -44,7 +43,6 @@ public class ObstacleSpawnManager : MonoBehaviour
 
         obstacleSpeed = Random.Range(minObstacleSpeed, maxObstacleSpeed);
         obstacleSpawnPosX *= -dir;
-        InstantiateRandomBonus();
         InstantiateRandomObstacle();
         StartCoroutine(InstantiateWithDelay());
     }
@@ -72,15 +70,4 @@ public class ObstacleSpawnManager : MonoBehaviour
         int randomObstacle = Random.Range(0, obstaclesToSpawn.Length);
         Instantiate(obstaclesToSpawn[randomObstacle], transform);
     }
-
-    void InstantiateRandomBonus()
-    {
-        //instantiate bonus Game Object
-        int randomPosX = Random.Range(-playerController.playerOutBoundSide, playerController.playerOutBoundSide);
-        Vector3 spawnPos = new Vector3(randomPosX, transform.position.y , transform.position.z);
-        transform.position = spawnPos;
-        Instantiate(bonusToSpawn, transform);
-
-    }
-
 }
