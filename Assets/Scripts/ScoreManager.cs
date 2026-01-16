@@ -21,6 +21,7 @@ public class ScoreManager : MonoBehaviour
     private int minSectionsUntilBonus = 10;
     private int maxSectionsUntilBonus = 20;
     private int sectionsUntilNextBonus;
+    private int bonusPoints;
     void Awake()
     {
         groundManagerObject = GameObject.Find("_GroundManager");
@@ -67,7 +68,7 @@ public class ScoreManager : MonoBehaviour
 
         if (currentSection > maxSectionReached) {
             maxSectionReached = currentSection;
-            OnNewMaxReached.Invoke();
+            OnNewMaxReached?.Invoke();
             Debug.Log("Current score is: " + maxSectionReached);
 
             sectionsUntilNextBonus--;
@@ -102,8 +103,9 @@ public class ScoreManager : MonoBehaviour
         Debug.Log("Sections until next bonus:" + sectionsUntilNextBonus);
     }
 
-    void AddBonusPoints()
+    void AddBonusPoints(int point)
     {
-        Debug.Log("BONUS +1");
+         bonusPoints += point;
+         Debug.Log("Bonus points: " + bonusPoints);
     }
 }  

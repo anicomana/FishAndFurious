@@ -63,6 +63,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f757d52ea2744d846b17355dcc6176b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1789726063655726714}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f757d52ea2744d846b17355dcc6176b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3667227624741869575}
   m_SourcePrefab: {fileID: 100100000, guid: f757d52ea2744d846b17355dcc6176b6, type: 3}
 --- !u!1 &1367457596041369393 stripped
 GameObject:
@@ -90,3 +93,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0074502616, y: 0.0023439962, z: 0.007833667}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3667227624741869575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367457596041369393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1cbeef8434dc245bb4f350efe6719b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonusController
+  pointsValue: 2

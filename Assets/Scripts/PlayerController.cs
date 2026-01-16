@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     GameManager gameManager;
     GameObject gameManagerObject;
     public event System.Action OnEnemyCollision;
-    public event System.Action OnBonusCollision;
+    public event System.Action<int> OnBonusCollision;
     GameObject player;
 
     public Vector3 playerInitialPos;
@@ -75,19 +75,24 @@ public class PlayerController : MonoBehaviour
             playerTargetPos = new Vector3(playerOutBoundSide, playerTargetPos.y, playerTargetPos.z);
         }
     }
-
+ 
     private void OnTriggerEnter(Collider other)
     {
         switch (other.gameObject.tag) {
             case "Enemy":
-            OnEnemyCollision?.Invoke();
-            break;
+                OnEnemyCollision?.Invoke();
+                break;
 
             case "Bonus":
-            OnBonusCollision?.Invoke();
-            Debug.Log("Entered collision with bonus");
-            Destroy(other.gameObject);
-            break;
+                BonusController bonus = other.GetComponent<BonusController>();
+
+                if(bonus != null) {
+                    int bonusPointsValue = bonus.ReturnPointsValue();
+                    OnBonusCollision?.Invoke(bonusPointsValue);
+                }
+
+                Destroy(other.gameObject);
+                break;
         }
     }
 
