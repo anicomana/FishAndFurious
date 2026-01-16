@@ -47,7 +47,6 @@ public class GroundMovement : MonoBehaviour
 
         if (gameManagerObject != null) {
             gameManager = gameManagerObject.GetComponent<GameManager>();
-            gameManager.OnGameReset += ResetGroundPosition;
         }
 
         if(gameObject.CompareTag("StartingBase")) {
@@ -134,10 +133,6 @@ public class GroundMovement : MonoBehaviour
             if (groundManager != null) {
             groundManager.OnMovedForward -= MoveForward;
             groundManager.OnMovedBackward -= MoveBackward;
-        }
-
-        if (gameManager != null) {
-            gameManager.OnGameReset -= ResetGroundPosition;
         }
 
         Destroy(gameObject);

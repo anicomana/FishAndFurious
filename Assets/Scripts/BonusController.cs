@@ -3,6 +3,7 @@ using UnityEngine;
 public class BonusController : MonoBehaviour
 {
     public int pointsValue;
+    public int rotationSpeed = 150;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,7 +14,7 @@ public class BonusController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f, Space.World);
     }
 
     public int ReturnPointsValue()

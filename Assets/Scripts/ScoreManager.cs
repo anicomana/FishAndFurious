@@ -21,7 +21,7 @@ public class ScoreManager : MonoBehaviour
     private int minSectionsUntilBonus = 10;
     private int maxSectionsUntilBonus = 20;
     private int sectionsUntilNextBonus;
-    private int bonusPoints;
+    private float bonusPoints;
     void Awake()
     {
         groundManagerObject = GameObject.Find("_GroundManager");
@@ -38,7 +38,6 @@ public class ScoreManager : MonoBehaviour
         if (gameManagerObject !=null) {
             gameManager = gameManagerObject.GetComponent<GameManager>();
             gameManager.OnGameOver += CalculateFinalScore;
-            gameManager.OnGameReset += ResetSCore;
         }
 
         if(groundManagerObject !=null) {
@@ -88,7 +87,8 @@ public class ScoreManager : MonoBehaviour
 
     void CalculateFinalScore()
     {
-        Debug.Log("Your final score is: " + maxSectionReached);
+        float finalScore = maxSectionReached + bonusPoints;
+        Debug.Log("Streets crossed: " + maxSectionReached + " || Bonus Points: " + bonusPoints + " || Final Score " + finalScore);
     }
     //to be called when Restart event is Invoked
     void ResetSCore()
@@ -100,7 +100,6 @@ public class ScoreManager : MonoBehaviour
     void ResetSectionsUntilBonus()
     {
         sectionsUntilNextBonus = Random.Range(minSectionsUntilBonus, maxSectionsUntilBonus + 1);
-        Debug.Log("Sections until next bonus:" + sectionsUntilNextBonus);
     }
 
     void AddBonusPoints(int point)

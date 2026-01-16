@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
         if (gameManagerObject != null) {
             gameManager = gameManagerObject.GetComponent<GameManager>();
             gameManager.OnGameOver += () => {isGameOver = true;};
-            gameManager.OnGameReset += ResetPlayerPos;
         }
         playerInitialPos = transform.position;
         playerTargetPos = transform.position;
@@ -94,11 +93,5 @@ public class PlayerController : MonoBehaviour
                 Destroy(other.gameObject);
                 break;
         }
-    }
-
-    void ResetPlayerPos()
-    {
-        transform.position = playerInitialPos;
-        isGameOver = false;
     }
 }

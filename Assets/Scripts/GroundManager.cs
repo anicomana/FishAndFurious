@@ -50,7 +50,6 @@ public class GroundManager : MonoBehaviour
         if (gameManagerObject != null) {
             gameManager = gameManagerObject.GetComponent<GameManager>();
             gameManager.OnGameOver += GroundGameOver;
-            gameManager.OnGameReset += ResetGroundSpawn;
         }
 
         if (bonusSpawnManagerObject != null) {

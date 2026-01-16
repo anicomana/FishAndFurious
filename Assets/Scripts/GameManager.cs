@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 public class GameManager : MonoBehaviour
 {
@@ -7,9 +8,7 @@ public class GameManager : MonoBehaviour
     ScoreManager scoreManager;
     GameObject scoreManagerObject;
     public event System.Action OnGameOver;
-    public event System.Action OnGameReset;
     public int maxBackwardsSteps = 3;
-    //private bool isGameOver;
 
     void Awake()
     {
@@ -32,8 +31,8 @@ public class GameManager : MonoBehaviour
     {
         //if isGameOver true and press R then invoke Restart Event
         if (Input.GetKeyDown(KeyCode.R)) {
-            OnGameReset?.Invoke();
-            Debug.Log("GAME RESET");
+            string currentScene = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(currentScene);
         }
     }
 

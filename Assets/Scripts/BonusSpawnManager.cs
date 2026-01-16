@@ -34,7 +34,6 @@ public class BonusSpawnManager : MonoBehaviour
 
         if (scoreManagerObject != null) {
             scoreManager = scoreManagerObject.GetComponent<ScoreManager>();
-            //scoreManager.OnNewBonusReached += InstantiateRandomBonus;
         }
 
         if (gameManagerObject !=null) {
