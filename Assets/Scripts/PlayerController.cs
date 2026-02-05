@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
                 OnEnemyCollision?.Invoke();
                 waterParticle.Stop();
                 smashParticle.Play();
-                //playerAnim.SetTrigger(); Death animation when dies
+                playerAnim.SetBool("Death_b", true);
                 break;
 
             case "Bonus":
