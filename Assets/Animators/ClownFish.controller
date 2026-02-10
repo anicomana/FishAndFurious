@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: bDeath
+    m_ConditionEvent: Death_b
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4211294826926554954}
@@ -45,7 +45,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -4977210580334121839, guid: 7d1377e5322efa54a8f2d7de168a35ec, type: 3}
+  m_Motion: {fileID: 7400000, guid: c3307784b75341f458e8f741afff7865, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -85,7 +85,7 @@ AnimatorController:
   m_Name: ClownFish
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: bDeath
+  - m_Name: Death_b
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
