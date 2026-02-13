@@ -2,18 +2,17 @@ using UnityEngine;
 
 public class BonusSpawnManager : MonoBehaviour
 {
-    //where to listen for event
-
-    PlayerController playerController;
-    GameObject player;
-    ScoreManager scoreManager;
-    GameObject scoreManagerObject;
-    GameManager gameManager;
-    GameObject gameManagerObject;
-    GroundManager groundManager;
-    GameObject groundManagerObject;
-
     public GameObject bonusToSpawn;
+
+    //where to listen for events
+    private PlayerController playerController;
+    private GameObject player;
+    private ScoreManager scoreManager;
+    private GameObject scoreManagerObject;
+    private GameManager gameManager;
+    private GameObject gameManagerObject;
+    private GroundManager groundManager;
+    private GameObject groundManagerObject;
 
     void Awake()
     {
@@ -62,7 +61,5 @@ public class BonusSpawnManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(randomPosX, transform.position.y , transform.position.z);
         transform.position = spawnPos;
         Instantiate(bonusToSpawn, transform);
-        Debug.Log("instantiate bonus");
-
     }
 }

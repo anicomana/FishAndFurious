@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //if isGameOver true and press R then invoke Restart Event
-        if (Input.GetKeyDown(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.R) && isGameOver == true) {
             string currentScene = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentScene);
         }
@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
         if (isGameOver == false) {
             isGameOver = true;
             OnGameOver?.Invoke();
-            Debug.Log("GAMEOVER");
         }
     }
 }

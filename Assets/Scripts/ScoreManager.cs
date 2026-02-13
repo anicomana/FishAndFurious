@@ -1,19 +1,25 @@
 using UnityEngine;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
     public event System.Action OnNewMaxReached;
     public event System.Action MovedBackTooMuch;
     public event System.Action OnNewBonusReached;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI bonusPointsText;
+    public TextMeshProUGUI gameOScoreText;
+    public TextMeshProUGUI gameOBonusPointsText;
+    public TextMeshProUGUI gameOFinalPointsText; 
 
     //where to listen events from
-    GroundManager groundManager;
-    GameObject groundManagerObject;
-    GameManager gameManager;
-    GameObject gameManagerObject;
-    GameObject startingBase;
-    PlayerController playerController;
-    GameObject playerControllerObject;
+    private GroundManager groundManager;
+    private GameObject groundManagerObject;
+    private GameManager gameManager;
+    private GameObject gameManagerObject;
+    private GameObject startingBase;
+    private PlayerController playerController;
+    private GameObject playerControllerObject;
 
     private float currentSection;
     private float maxSectionReached;
@@ -67,13 +73,18 @@ public class ScoreManager : MonoBehaviour
         if (currentSection > maxSectionReached) {
             maxSectionReached = currentSection;
             OnNewMaxReached?.Invoke();
-            Debug.Log("Current score is: " + maxSectionReached);
+
+            //Display Score on UI
+            if (maxSectionReached > 0) {
+                scoreText.text = "Roads crossed: " + maxSectionReached;
+            }
 
             sectionsUntilNextBonus--;
+
+            //Invoke event to let listeners know that is time to spawn new bonus
             if(sectionsUntilNextBonus <= 0) {
                 ResetSectionsUntilBonus();
                 OnNewBonusReached?.Invoke();
-                Debug.Log("Next bonus reached");
             }
         }
     }
@@ -83,27 +94,32 @@ public class ScoreManager : MonoBehaviour
     {
         currentSection--;
     }
-
-    void CalculateFinalScore()
-    {
-        float finalScore = maxSectionReached + bonusPoints;
-        Debug.Log("Streets crossed: " + maxSectionReached + " || Bonus Points: " + bonusPoints + " || Final Score " + finalScore);
-    }
+    
     //to be called when Restart event is Invoked
     void ResetSCore()
     {
         currentSection = -startingBase.transform.position.z;
         maxSectionReached = currentSection;
     }
-
+    //Calculate on which section next bonus should spawn
     void ResetSectionsUntilBonus()
     {
         sectionsUntilNextBonus = Random.Range(minSectionsUntilBonus, maxSectionsUntilBonus + 1);
     }
 
+    //Calculate final score = Roads crossed + bonus value
+    void CalculateFinalScore()
+    {
+        float finalScore = maxSectionReached + bonusPoints;
+        //Debug.Log("Streets crossed: " + maxSectionReached + " || Bonus Points: " + bonusPoints + " || Final Score " + finalScore);
+        gameOBonusPointsText.text = "" + bonusPoints;
+        gameOScoreText.text = "" + maxSectionReached;
+        gameOFinalPointsText.text = "Final Score: " + finalScore;
+    }
+
     void AddBonusPoints(int point)
     {
          bonusPoints += point;
-         Debug.Log("Bonus points: " + bonusPoints);
+         bonusPointsText.text = "Bonus Points: " + bonusPoints;
     }
 }  
