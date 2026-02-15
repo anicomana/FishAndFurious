@@ -1,16 +1,14 @@
 using UnityEngine;
-using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
     public event System.Action OnNewMaxReached;
     public event System.Action MovedBackTooMuch;
     public event System.Action OnNewBonusReached;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI bonusPointsText;
-    public TextMeshProUGUI gameOScoreText;
-    public TextMeshProUGUI gameOBonusPointsText;
-    public TextMeshProUGUI gameOFinalPointsText; 
+    public event System.Action OnNewBonusPoints;
+    public float bonusPoints;
+    public float maxSectionReached;
+
 
     //where to listen events from
     private GroundManager groundManager;
@@ -22,11 +20,9 @@ public class ScoreManager : MonoBehaviour
     private GameObject playerControllerObject;
 
     private float currentSection;
-    private float maxSectionReached;
     private int minSectionsUntilBonus = 5;
     private int maxSectionsUntilBonus = 10;
     private int sectionsUntilNextBonus;
-    private float bonusPoints;
     void Awake()
     {
         groundManagerObject = GameObject.Find("_GroundManager");
@@ -74,11 +70,6 @@ public class ScoreManager : MonoBehaviour
             maxSectionReached = currentSection;
             OnNewMaxReached?.Invoke();
 
-            //Display Score on UI
-            if (maxSectionReached > 0) {
-                scoreText.text = "Roads crossed: " + maxSectionReached;
-            }
-
             sectionsUntilNextBonus--;
 
             //Invoke event to let listeners know that is time to spawn new bonus
@@ -111,15 +102,11 @@ public class ScoreManager : MonoBehaviour
     void CalculateFinalScore()
     {
         float finalScore = maxSectionReached + bonusPoints;
-        //Debug.Log("Streets crossed: " + maxSectionReached + " || Bonus Points: " + bonusPoints + " || Final Score " + finalScore);
-        gameOBonusPointsText.text = "" + bonusPoints;
-        gameOScoreText.text = "" + maxSectionReached;
-        gameOFinalPointsText.text = "Final Score: " + finalScore;
     }
 
     void AddBonusPoints(int point)
     {
          bonusPoints += point;
-         bonusPointsText.text = "Bonus Points: " + bonusPoints;
+         OnNewBonusPoints?.Invoke();
     }
 }  
