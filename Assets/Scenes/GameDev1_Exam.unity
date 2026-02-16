@@ -1923,6 +1923,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   inGameScreen: {fileID: 1138563811}
   gameOverScreen: {fileID: 2102631170}
+  scoreText: {fileID: 52097461}
+  bonusPointsText: {fileID: 1128758640}
+  gameOScoreText: {fileID: 1724991999}
+  gameOBonusPointsText: {fileID: 550471626}
+  gameOFinalPointsText: {fileID: 561103554}
 --- !u!1 &953127330
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,11 +2335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a9ba7bda2d12a40aeb032539819258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
-  scoreText: {fileID: 52097461}
-  bonusPointsText: {fileID: 1128758640}
-  gameOScoreText: {fileID: 1724991999}
-  gameOBonusPointsText: {fileID: 550471626}
-  gameOFinalPointsText: {fileID: 561103554}
+  bonusPoints: 0
+  maxSectionReached: 0
 --- !u!4 &1215828561 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2686070010663768819, guid: 626d414f6aaa2b14da5c51460f84d479, type: 3}
